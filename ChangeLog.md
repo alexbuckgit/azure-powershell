@@ -1,3 +1,109 @@
+## 5.1.0 - August 2020
+#### Az.Accounts
+* Fixed one issue related to MSI
+
+#### Az.Aks
+* [Breaking Change] Removed parameter alias 'ClientIdAndSecret' in 'New-AzAksCluster' and 'Set-AzAksCluster'.
+* [Breaking Change] Changed the default value of 'NodeVmSetType' in 'New-AzAksCluster' from 'AvailabilitySet' to 'VirtualMachineScaleSets'.
+* [Breaking Change] Changed the default value of 'NetworkPlugin' in 'New-AzAksCluster' from 'None' to 'azure'.
+* [Breaking Change] Removed parameter 'NodeOsType' in 'New-AzAksCluster' as it supports only one value Linux.
+
+#### Az.DataFactory
+* Updated ADF .Net SDK version to 4.12.0
+* Updated ADF encryption client SDK version to 4.14.7587.7
+* Added 'Stop-AzDataFactoryV2TriggerRun' and 'Invoke-AzDataFactoryV2TriggerRun' commands
+
+#### Az.DataLakeStore
+* Added breaking change description for 'Export-AzDataLakeStoreItem' and 'Import-AzDataLakeStoreItem'
+* Added option of Byte encoding for 'New-AzDataLakeStoreItem', 'Add-AzDAtaLakeStoreItemContent', and 'Get-AzDAtaLakeStoreItemContent'
+
+#### Az.DesktopVirtualization
+* Require Location property for creating top level arm objects.
+        * Made `ApplicationGroupType` required for `New-AzWvdApplicationGroup`.
+        * Made `HostPoolArmPath` required for `New-AzWvdApplicationGroup`.
+        * Added `PreferredAppGroupType` for `New-AzWvdHostPool`.
+
+#### Az.EventHub
+* Added optional switch parameter 'TrustedServiceAccessEnabled' to 'Set-AzEventHubNetworkRuleSet' cmdlet
+
+#### Az.HDInsight
+ * For New-AzHDInsightCluster cmdlet:
+     - Replaced parameter 'DefaultStorageAccountName' with 'StorageAccountResourceId'
+     - Replaced parameter 'DefaultStorageAccountKey' with 'StorageAccountKey'
+     - Replaced parameter 'DefaultStorageAccountType' with 'StorageAccountType'
+     - Removed parameter 'PublicNetworkAccessType'
+     - Removed parameter 'OutboundPublicNetworkAccessType'
+     - Added new parameters: 'StorageFileSystem' and 'StorageAccountManagedIdentity' to support ADLSGen2
+     - Added new parameter 'EnableIDBroker' to Support HDInsight ID Broker
+     - Added new parameters: 'KafkaClientGroupId', 'KafkaClientGroupName' and 'KafkaManagementNodeSize' to support Kafka Rest Proxy
+ * For New-AzHDInsightClusterConfig cmdlet:
+     - Replaced parameter 'DefaultStorageAccountName' with 'StorageAccountResourceId'
+     - Replaced parameter 'DefaultStorageAccountKey' with 'StorageAccountKey'
+     - Replaced parameter 'DefaultStorageAccountType' with 'StorageAccountType'
+     - Removed parameter 'PublicNetworkAccessType'
+     - Removed parameter 'OutboundPublicNetworkAccessType'
+* For Set-AzHDInsightDefaultStorage cmdlet:
+    - Replaced parameter 'StorageAccountName' with 'StorageAccountResourceId'
+* For Add-AzHDInsightSecurityProfile cmdlet:
+    - Replaced parameter 'Domain' with 'DomainResourceId'
+    - Removed the mandatory requirement for parameter 'OrganizationalUnitDN'
+
+#### Az.IotHub
+* Updated devices sdk.
+
+#### Az.KeyVault
+* [Breaking Change] Deprecated parameter DisableSoftDelete in 'New-AzKeyVault' and EnableSoftDelete in 'Update-AzKeyVault'
+* [Breaking Change] Removed attribute SecretValueText to avoid displaying SecretValue directly [#12266]
+* Supported new resource type: managed HSM
+    - CRUD of managed HSM and cmdlets to operate keys on managed HSM
+    - Full HSM backup/restore, AES key creation, security domain backup/restore, RBAC
+
+#### Az.LogicApp
+* Update references in .psd1 to use relative path
+
+#### Az.Network
+* [Breaking Change] Removed parameter 'HostedSubnet' and added 'Subnet' instead
+* Added new cmdlets for Virtual Router Peer Routes
+    - 'Get-AzVirtualRouterPeerLearnedRoute'
+    - 'Get-AzVirtualRouterPeerAdvertisedRoute'
+* Updated New-AzFirewall cmdlet:
+    - Added parameter '-SkuTier'
+    - Added parameter '-SkuName' and made Sku as Alias for this
+    - Removed parameter '-Sku'
+* [Breaking Change] Made 'Connectionlink' argument mandatory in 'Start-AzVpnConnectionPacketCapture' and 'Stop-AzVpnConnectionPacketCapture'
+* [Breaking Change] Updated 'New-AzNetworkWatcherConnectionMonitorEndPointObject' to remove parameter '-Filter'
+* [Breaking Change] Replaced 'New-AzNetworkWatcherConnectionMonitorEndpointFilterItemObject' cmdlet with 'New-AzNetworkWatcherConnectionMonitorEndpointScopeItemObject'
+* Updated 'New-AzNetworkWatcherConnectionMonitorEndPointObject' cmdlet:
+	- Added parameter '-Type'
+	- Added parameter '-CoverageLevel'
+	- Added parameter '-Scope'
+* Updated 'New-AzNetworkWatcherConnectionMonitorProtocolConfigurationObject' cmdlet with new parameter '-DestinationPortBehavior'
+
+#### Az.RecoveryServices
+* Fixing Workload Restore for contributor permissions.
+* Added new parameter sets and validations for Restore-AzRecoveryServicesBackupItem cmdlet.
+
+#### Az.Resources
+* Fixed parsing bug
+* Updated ARM template What-If cmdlets to remove preview message from results
+* Fixed an issue where template deployment cmdlets crash if '-WhatIf' is set at a higher scope [#13038]
+* Fixed an issue where template deployment cmdlets does not preserve case for template parameters
+* Added a default API version to be used in 'Export-AzResourceGroup' cmdlet
+* Added cmdlets for Template Specs ('Get-AzTemplateSpec', 'Set-AzTemplateSpec', 'New-AzTemplateSpec', 'Remove-AzTemplateSpec', 'Export-AzTemplateSpec')
+* Added support for deploying Template Specs using existing deployment cmdlets (via the new -TemplateSpecId parameter) 
+* Updated 'Get-AzResourceGroupDeploymentOperation' to use the SDK.
+* Removed '-ApiVersion' parameter from '*-AzDeployment' cmdlets.
+
+#### Az.Sql
+* Added DiffBackupIntervalInHours to 'Set-AzSqlDatabaseBackupShortTermRetentionPolicy' 
+* Fixed issue where New-AzSqlDatabaseExport fails if networkIsolation not specified [#13097]
+* Fixed issue where New-AzSqlDatabaseExport and New-AzSqlDatabaseImport were not returning OperationStatusLink in the result object [#13097]
+* Update Azure Paired Regions URL in Backup Storage Redundancy Warnings 
+
+#### Az.Websites
+* Added support for Premium V3 pricing tier
+* Updated the WebSites SDK to 3.1.0
+
 ## 5.0.0 - October 2020
 #### Az.Accounts
 * [Breaking Change] Removed 'Get-AzProfile' and 'Select-AzProfile'
